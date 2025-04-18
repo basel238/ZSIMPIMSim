@@ -1,0 +1,23 @@
+# Build artifacts
+build/
+bin/
+*.o
+*.os
+*.log
+*.po
+*.dep
+*.deppo
+
+# Large generated files
+*.out
+*.dump
+*.dat
+
+# IDE stuff
+.vscode/
+.idea/
+*.swp
+
+# System files
+.DS_Store
+
