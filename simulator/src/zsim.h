@@ -191,6 +191,7 @@ struct GlobSimInfo {
 
     bool ramulator_memory = false;
     Ramulator  *ramulator;
+    bool pim_simulator = false;
     std::string application;
     std::string to_record_stats;
 

@@ -8,8 +8,8 @@ apt-get -y install perl
 apt-get -y install flex
 apt-get -y install bison
 apt-get -y install byacc
-#apt-get -y install libconfig-dev
-#apt-get -y install libconfig++-dev
+apt-get -y install libconfig-dev
+apt-get -y install libconfig++-dev
 apt-get -y install libhdf5-dev
 apt-get -y install libelf-dev
 

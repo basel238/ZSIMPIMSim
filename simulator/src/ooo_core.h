@@ -499,10 +499,10 @@ class OOOCore : public Core {
 
         static void LoadFunc(THREADID tid, ADDRINT addr, UINT32 size);
         static void StoreFunc(THREADID tid, ADDRINT addr, UINT32 size);
-        static void PredLoadFunc(THREADID tid, ADDRINT addr, BOOL pred, UINT32 size);
-        static void PredStoreFunc(THREADID tid, ADDRINT addr, BOOL pred, UINT32 size);
+        static void PredLoadFunc(THREADID tid, ADDRINT addr, LEVEL_BASE::BOOL pred, UINT32 size);
+        static void PredStoreFunc(THREADID tid, ADDRINT addr, LEVEL_BASE::BOOL pred, UINT32 size);
         static void BblFunc(THREADID tid, ADDRINT bblAddr, BblInfo* bblInfo);
-        static void BranchFunc(THREADID tid, ADDRINT pc, BOOL taken, ADDRINT takenNpc, ADDRINT notTakenNpc);
+        static void BranchFunc(THREADID tid, ADDRINT pc, LEVEL_BASE::BOOL taken, ADDRINT takenNpc, ADDRINT notTakenNpc);
 } ATTR_LINE_ALIGNED;  // Take up an int number of cache lines
 
 #endif  // OOO_CORE_H_

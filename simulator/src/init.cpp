@@ -341,7 +341,7 @@ MemObject* BuildMemoryController(Config& config, uint32_t lineSize, uint32_t fre
     string type = config.get<const char*>("sys.mem.type", "Simple");
 
     //Latency
-    uint32_t latency = (type == "DDR")? -1 : config.get<uint32_t>("sys.mem.latency", 100);
+    uint32_t latency = (type == "DDR")? -1 : config.get<uint32_t>("sys.mem.latency", 20);
 
     MemObject* mem = nullptr;
     if (type == "Simple") {
@@ -368,10 +368,11 @@ MemObject* BuildMemoryController(Config& config, uint32_t lineSize, uint32_t fre
         uint64_t cpuFreqHz = 1000000 * frequency;
         uint32_t capacity = config.get<uint32_t>("sys.mem.capacityMB", 16384);
         string dramTechIni = config.get<const char*>("sys.mem.techIni");
+        bool pimMode = config.get<bool>("sim.pimMode", false);
         string dramSystemIni = config.get<const char*>("sys.mem.systemIni");
         string outputDir = config.get<const char*>("sys.mem.outputDir");
         string traceName = config.get<const char*>("sys.mem.traceName");
-        mem = new DRAMSimMemory(dramTechIni, dramSystemIni, outputDir, traceName, capacity, cpuFreqHz, latency, domain, name);
+        mem = new DRAMSimMemory(dramTechIni, dramSystemIni, outputDir, traceName, capacity, cpuFreqHz, latency, domain, name, pimMode);
     } else if (type == "Ramulator") {
         string ramulatorConfig = config.get<const char*>("sys.mem.ramulatorConfig");
         bool pimMode = config.get<bool>("sim.pimMode", false);

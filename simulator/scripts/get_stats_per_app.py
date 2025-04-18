@@ -48,11 +48,11 @@ with open(tmp, "r") as ins:
             if(line.find("instrs: ")!=-1):
                 label = "instrs"
                 instructions += int(line.split()[1])
-                
+
             if(line.find("Simulated unhalted cycles")!= -1):
                 label = "cycles"
                 cycles_list.append(int(line.split()[1]))
-                
+
 
             # ====================== Cache Metrics  ======================
             if(line.find("l1d:")!=-1):
@@ -79,7 +79,7 @@ with open(tmp, "r") as ins:
                     tmp2 = line.split(":")[0]
                     tmp2 = tmp2.replace(":","")
                     core_id = int(tmp2.split("-")[1])
-                    
+
                 if(line.find("# GETS hits")!=-1 or line.find("# GETX hits")!=-1):
                     label = "l1d+hits"
                     l1_hits += int(line.split()[1])
@@ -87,30 +87,30 @@ with open(tmp, "r") as ins:
                 if(line.find("# GETS misses")!=-1 or line.find("# GETX I->M misses")!=-1):
                     label = "l1d+misses"
                     l1_misses += int(line.split()[1])
-                    
+
             if(l2d == True):
                 if(line.find("hGETS:")!=-1 or line.find("hGETX:")!=-1):
                     label = "l2d+hits"
                     l2_hits += int(line.split()[1])
-                    
+
 
                 if(line.find("# GETS misses")!=-1):
                     label = "l2d+misses"
                     l2_misses += int(line.split()[1])
-                    
+
             if(l3d == True):
                 if(line.find("hGETS:")!=-1 or line.find("hGETX:")!=-1):
                     label = "l3d+hits"
                     l3_hits += int(line.split()[1])
-                    
-                
+
+
                 if(line.find("# GETS misses")!=-1 or line.find("# GETX I->M misses")!=-1):
                     label = "l3d+misses"
                     l3_misses += int(line.split()[1])
-                    
+
 
         except:
-            print "Couldn't read some stat. Check label: " + label
+            print("Couldn't read some stat. Check label: " + label)
 
 # ====================== CPU Metrics  ======================
 if(len(cycles_list)!=0):
@@ -120,7 +120,7 @@ try:
     ipc = float(instructions)/float(cycles)
 except:
     ipc = 0.0
-       
+
 # ====================== Cache Metrics  ======================
 
 try:

@@ -85,10 +85,32 @@ def create_pim_configs(benchmark, application, function, command, version):
             config_file.close()
         ins.close()
 
+def create_hbm_pim_configs(benchmark, application, function, command):
+    number_of_cores = [1, 4, 16, 64, 256]
+
+    for cores in number_of_cores:
+        mkdir_p(ROOT+"config_files/hbm_pim/"+benchmark+"/"+str(cores)+"/")
+
+    for cores in number_of_cores:
+        mkdir_p(ROOT+"zsim_stats/hbm_pim/"+str(cores)+"/")
+
+    for cores in number_of_cores:
+        with open(ROOT+"templates/template_hbm_pim.cfg", "r") as ins:
+            config_file = open(ROOT+"config_files/hbm_pim/"+benchmark+"/"+str(cores)+"/"+application+"_"+function+".cfg","w")
+            for line in ins:
+                line = line.replace("NUMBER_CORES", str(cores))
+                line = line.replace("STATS_PATH", "zsim_stats/hbm_pim/"+str(cores)+"/"+benchmark+"_"+application+"_"+function)
+                line = line.replace("COMMAND_STRING", "\"" + command + "\";")
+                line = line.replace("THREADS", str(cores))
+                line = line.replace("PIM_ROOT",PIM_ROOT)
+
+                config_file.write(line)
+            config_file.close()
+        ins.close()
 
 if(len(sys.argv) < 2):
-    print "Usage python generate_config_files.py command_file"
-    print "command_file: benckmark,applicationm,function,command"
+    print("Usage python generate_config_files.py command_file")
+    print("command_file: benckmark,applicationm,function,command")
     exit(1)
 
 with open(sys.argv[1], "r") as command_file:
@@ -98,7 +120,7 @@ with open(sys.argv[1], "r") as command_file:
         application = line[1]
         function = line[2]
         command = line[3]
-        print line
+        print(line)
         command = command.replace('\n','')
 
         ### Fixed LLC Size 
@@ -115,3 +137,4 @@ with open(sys.argv[1], "r") as command_file:
         create_host_configs_prefetch(benchmark, application, function, command, "accelerator")
         create_pim_configs(benchmark, application, function, command,"accelerator")
 
+        create_hbm_pim_configs(benchmark, application, function, command)

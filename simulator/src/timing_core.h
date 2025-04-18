@@ -98,10 +98,10 @@ class TimingCore : public Core {
         static void LoadAndRecordFunc(THREADID tid, ADDRINT addr, UINT32 size);
         static void StoreAndRecordFunc(THREADID tid, ADDRINT addr, UINT32 size);
         static void BblAndRecordFunc(THREADID tid, ADDRINT bblAddr, BblInfo* bblInfo);
-        static void PredLoadAndRecordFunc(THREADID tid, ADDRINT addr, BOOL pred, UINT32 size);
-        static void PredStoreAndRecordFunc(THREADID tid, ADDRINT addr, BOOL pred, UINT32 size);
+        static void PredLoadAndRecordFunc(THREADID tid, ADDRINT addr, LEVEL_BASE::BOOL pred, UINT32 size);
+        static void PredStoreAndRecordFunc(THREADID tid, ADDRINT addr, LEVEL_BASE::BOOL pred, UINT32 size);
 
-        static void BranchFunc(THREADID, ADDRINT, BOOL, ADDRINT, ADDRINT) {}
+        static void BranchFunc(THREADID, ADDRINT, LEVEL_BASE::BOOL, ADDRINT, ADDRINT) {}
 } ATTR_LINE_ALIGNED;
 
 #endif  // TIMING_CORE_H_
